@@ -1,0 +1,40 @@
+name: Enterprise API Automation Pipeline
+
+# 1. Trigger the pipeline on every code push or pull request to the main branch
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  # Allows you to click a button in GitHub to run it manually
+  workflow_dispatch: 
+
+jobs:
+  automation-suite:
+    runs-on: ubuntu-latest # Running on a clean, fast Linux cloud server
+
+    steps:
+    # Step 1: Checkout your framework code from the GitHub repository
+    - name: Checkout Repository Code
+      uses: actions/checkout@v4
+
+    # Step 2: Setup Java Environment (JDK 17 or JDK 11 depending on your workspace setup)
+    - name: Setup Java Development Kit (JDK)
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+
+    # Step 3: Run your multi-threaded, parallel test suite via Maven
+    - name: Execute Parallel Test Suite
+      run: mvn test -Denv=staging
+
+    # Step 4: Archive and upload Extent Reports even if tests fail
+    - name: Upload Test Execution Reports
+      if: always() # Ensures reports upload even if a test assertion drops
+      uses: actions/artifacts@v4
+      with:
+        name: Extent-Execution-Report
+        path: target/ExtentReports/ # Update this to your exact Extent Report output directory path
+        retention-days: 7
