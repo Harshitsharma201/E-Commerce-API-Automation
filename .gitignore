@@ -1,0 +1,36 @@
+# ==========================================
+# 📦 MAVEN EXCLUSIONS
+# ==========================================
+/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+pom.xml.versionsBackup
+release.properties
+
+# ==========================================
+# 🛠️ ECLIPSE SPECIFIC METADATA JUNK
+# ==========================================
+.metadata/
+.bin/
+/bin/
+.tmp/
+.errors/
+.settings/
+.classpath
+.project
+*.launch
+
+# ==========================================
+# 📝 LOGS AND TEMPORARY RUN ARCHIVES
+# ==========================================
+*.log
+logs/
+test-output/
+extentreports/
+
+# ==========================================
+# 🖥️ OPERATING SYSTEM CACHE FILES
+# ==========================================
+.DS_Store
+Thumbs.db

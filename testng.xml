@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Restful Booker API Automation Framework Suite" verbose="2" parallel="tests" thread-count="3">
+        <listeners>
+        <listener class-name="com.api.listeners.TestListener"/>
+    </listeners>
+    <test name="End-to-End Component Performance Verification">
+        <classes>
+            <class name="com.api.test.UserLoginTest"/>
+            
+            <class name="com.api.test.CreateBookingTest"/>
+            
+            <class name="com.api.test.UpdateBookingTest"/>
+            
+            <class name="com.api.test.DeleteRequestTest"/>
+            
+            <class name="com.api.test.DataProviderTest"/>
+            
+            <class name="com.api.test.JSONdataProviderTest"/>
+        </classes>
+    </test>
+    
+</suite>
