@@ -1,0 +1,46 @@
+name: Enterprise API Automation Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch: 
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  automation-suite:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Download your framework files into the cloud runner
+    - name: Checkout Repository Code
+      uses: actions/checkout@v4
+
+    # Step 2: Setup the Java Environment
+    - name: Setup Java Development Kit (JDK)
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+
+    # Step 3: Run your parallel test suite via Maven
+    - name: Execute Parallel Test Suite
+      run: mvn test -Denv=staging
+
+    # Step 4: Dynamically hunt down and upload the Extent Report
+    - name: Upload Test Execution Reports
+      if: always() # Ensures reports upload even if tests fail with exit code 1
+      uses: actions/upload-artifact@v4
+      with:
+        name: Extent-Execution-Report
+        # 🌟 MAGIC PATH: This searches all directories recursively for any .html files
+        path: |
+          **/*.html
+          **/ExtentReports/
+          **/extentreports/
+          **/test-output/
+        retention-days: 7
