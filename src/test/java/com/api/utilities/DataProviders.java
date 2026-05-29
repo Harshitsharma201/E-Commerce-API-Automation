@@ -2,6 +2,7 @@ package com.api.utilities;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,13 @@ public class DataProviders {
 	@DataProvider(name = "bookingJsonProvider")
     public static Object[][] getBookingDataFromJson() {
         try {
+  
+        	    InputStream inputStream = DataProviders.class.getClassLoader()
+        	                                .getResourceAsStream("testdata/booking-inputs.json");
+        	    
+        	    if (inputStream == null) {
+        	        throw new RuntimeException("💥 Could not find booking-inputs.json in the classpath resources folder!");
+        	    }
             // 1. Initialize Jackson's ObjectMapper
             ObjectMapper mapper = new ObjectMapper();
             
