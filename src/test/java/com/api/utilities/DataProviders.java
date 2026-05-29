@@ -28,7 +28,7 @@ public class DataProviders {
 String projectRoot = System.getProperty("user.dir");
 			
 			// 2. Build the absolute system file path using clean forward slashes
-			String jsonFilePath = projectRoot + "/src/test/resources/testdata/booking-inputs.json";
+			String jsonFilePath = projectRoot + "/src/test/resources/testData/booking-inputs.json";
 			
 			java.io.File jsonFile = new java.io.File(jsonFilePath);
 			
