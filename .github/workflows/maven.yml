@@ -27,14 +27,15 @@ jobs:
         cache: 'maven'
 
     # Step 3: Run your multi-threaded, parallel test suite via Maven
+    # Step 3: Run your multi-threaded, parallel test suite via Maven
     - name: Execute Parallel Test Suite
       run: mvn test -Denv=staging
 
     # Step 4: Archive and upload Extent Reports even if tests fail
     - name: Upload Test Execution Reports
       if: always() # Ensures reports upload even if a test assertion drops
-      uses: actions/artifacts@v4
+      uses: actions/upload-artifact@v4  # 🌟 FIXED: Changed 'actions/artifacts' to 'actions/upload-artifact'
       with:
         name: Extent-Execution-Report
-        path: target/ExtentReports/ # Update this to your exact Extent Report output directory path
+        path: target/ExtentReports/ # Update this to your exact Extent Report folder path if different
         retention-days: 7
