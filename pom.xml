@@ -63,10 +63,13 @@
     </dependency>
   </dependencies>
 
-  <build>
+<build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+
     <testResources>
       <testResource>
-        <directory>src/test/resources</directory>
+        <directory>${project.basedir}/src/test/resources</directory>
         <includes>
           <include>**/*.json</include>
           <include>**/*.properties</include>
@@ -90,10 +93,8 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.1.2</version>
         <configuration>
-          <suiteXmlFiles>
-            </suiteXmlFiles>
+          <useSystemClassLoader>true</useSystemClassLoader>
         </configuration>
       </plugin>
     </plugins>
-  </build>
-</project>
+  </build></project>
