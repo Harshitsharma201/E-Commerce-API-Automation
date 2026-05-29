@@ -30,7 +30,7 @@ public class DataProviders {
                     .getResourceAsStream("testdata/booking-inputs.json");
 
             if (inputStream == null) {
-                inputStream = DataProviders.class.getResourceAsStream("/testdata/booking-inputs.json");
+                inputStream = DataProviders.class.getResourceAsStream("src/test/resources/testdata/booking-inputs.json");
             }
 
             if (inputStream == null) {
